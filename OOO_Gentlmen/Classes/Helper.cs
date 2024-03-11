@@ -8,7 +8,7 @@ using OOO_Gentlmen;
 
 namespace OOO_Gentlmen.Classes
 {
-    internal class Helper
+    public class Helper
     {
         public static Order Order { get; set; }
 

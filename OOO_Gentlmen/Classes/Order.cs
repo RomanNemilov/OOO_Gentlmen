@@ -59,7 +59,7 @@ namespace OOO_Gentlmen.Classes
             Products.Remove(productInOrder);
         }
 
-        private ProductInOrder FindProduct(ProductExtended product)
+        public ProductInOrder FindProduct(ProductExtended product)
         {
             return Products.FirstOrDefault(productInOrder => productInOrder.ProductExtended.ProductName == product.ProductName);
         }

@@ -34,13 +34,13 @@
             <TextBlock Style="{StaticResource Title}" Grid.Column="1" Text="Авторзиация"/>
             <Button Name="ButtonExit" Grid.Column="2" Content="Выход" Margin="10" Click="ButtonExit_Click"/>
         </Grid>
-        <easy:Captcha Name="captcha" Grid.Row="3" Grid.Column="1" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,4,0,0" IsEnabled="False" MouseDown="captcha_Click"/>
+        <easy:Captcha Name="captcha" Grid.Row="3" Width="218" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="148,4,0,0" IsEnabled="False" MouseDown="captcha_Click" Grid.ColumnSpan="2"/>
         <Label Content="Логин:" Style="{StaticResource TextStyle}" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
         <Label Name="labelCaptcha" Content="Каптча:" Style="{StaticResource TextStyle}" HorizontalAlignment="Right" Margin="0,0,0,4" Grid.Row="3" VerticalAlignment="Bottom" IsEnabled="False"/>
         <Label Content="Пароль:" Style="{StaticResource TextStyle}" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBox x:Name="textBoxLogin" Style="{StaticResource TextStyle}" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Text="loginDEppn2018" VerticalAlignment="Center" Width="200"/>
-        <TextBox x:Name="textBoxCaptcha" Style="{StaticResource TextStyle}" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="200" Margin="0,0,0,8" IsEnabled="False"/>
-        <PasswordBox x:Name="textBoxPassword" Style="{StaticResource TextStyle}"  HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" Password="6}i+FD" VerticalAlignment="Center" Width="200" Margin="0,0,0,0"/>
+        <TextBox x:Name="textBoxLogin" Style="{StaticResource TextStyle}" HorizontalAlignment="Left" Margin="148,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="LupinRV@gmail.com" VerticalAlignment="Center" Width="218" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="textBoxCaptcha" Style="{StaticResource TextStyle}" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="218" Margin="148,0,0,8" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="textBoxPassword" Style="{StaticResource TextStyle}"  HorizontalAlignment="Left" Grid.Row="4" Password="roma2001" VerticalAlignment="Center" Width="218" Margin="148,0,0,0" Grid.ColumnSpan="2"/>
         <Button x:Name="ButtonGuest" Content="Гость" HorizontalAlignment="Right" Margin="0,0,4,0" Grid.Row="5" VerticalAlignment="Center" Width="80" Click="ButtonGuest_Click"/>
         <Button x:Name="ButtonLogin" Content="Вход" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Width="200" Margin="0,0,0,0" Click="ButtonLogin_Click"/>
     </Grid>

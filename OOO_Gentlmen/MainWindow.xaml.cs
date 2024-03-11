@@ -63,8 +63,8 @@ namespace OOO_Gentlmen
                 MessageBox.Show(sb.ToString());
                 return;
             }
-            Helper.User = Helper.DB.User.Where<User>(u => u.UserLogin == login && u.UserPassword == password).FirstOrDefault<User>();
-            if (Helper.User == null)
+            bool result = Login(login, password);
+            if (!result)
             {
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 if (captchaReqired)
@@ -79,6 +79,12 @@ namespace OOO_Gentlmen
                 return;
             }
             OpenCatalogWindow();
+        }
+
+        public bool Login(string login, string password)
+        {
+            Helper.User = Helper.DB.User.Where<User>(u => u.UserLogin == login && u.UserPassword == password).FirstOrDefault<User>();
+            return Helper.User != null;
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
