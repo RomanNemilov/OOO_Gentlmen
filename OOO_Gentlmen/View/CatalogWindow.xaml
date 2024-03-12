@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="/Resources/logo.png" Margin="0"/>
-            <TextBlock Grid.Column="1" Style="{StaticResource Title}"><Run Language="ru-ru" Text="Создание заказа"/></TextBlock>
+            <TextBlock Grid.Column="1" Style="{StaticResource Title}" Text="Каталог"/>
             <Button Name="ButtonExit" Grid.Column="2" Content="Выход" Margin="10" Click="ButtonExit_Click"/>
         </Grid>
         <Grid Grid.Row="1">
