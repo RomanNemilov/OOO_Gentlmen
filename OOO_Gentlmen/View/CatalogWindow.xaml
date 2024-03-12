@@ -58,7 +58,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Фильтры"/>
                 <TextBlock Text="Сортировка по цене:"/>
                 <ComboBox x:Name="comboBoxSort" SelectionChanged="comboBoxSort_SelectionChanged">
                     <ComboBoxItem Content="По возрастанию"/>

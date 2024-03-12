@@ -44,8 +44,8 @@ namespace GentlmenTests
             order.AddProduct(productExtended);
 
             // Assert
-            Assert.AreEqual(order.Products.Count, 1);
-            Assert.AreEqual(order.Products[0].Count, 2);
+            Assert.AreEqual(1, order.Products.Count);
+            Assert.AreEqual(2, order.Products[0].Count);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace GentlmenTests
             ProductInOrder productInOrder = order.FindProduct(productExtended1);
 
             // Assert
-            Assert.AreEqual(productInOrder.ProductExtended, productExtended1);
+            Assert.AreEqual(productExtended1, productInOrder.ProductExtended);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace GentlmenTests
             ProductInOrder productInOrder = order.FindProduct(productExtended1);
 
             // Assert
-            Assert.AreEqual(productInOrder, null);
+            Assert.AreEqual(null, productInOrder);
         }
 
         [Test]
@@ -114,8 +114,8 @@ namespace GentlmenTests
             order.RemoveEmptyProducts();
 
             // Assert
-            Assert.AreEqual(order.Products.Count, 1);
-            Assert.AreEqual(order.Products[0].ProductExtended, productExtended2 );
+            Assert.AreEqual(1, order.Products.Count);
+            Assert.AreEqual(productExtended2, order.Products[0].ProductExtended);
         }
     }
 }
