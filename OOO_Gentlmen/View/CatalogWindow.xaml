@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OOO_Gentlmen.View"
         mc:Ignorable="d"
-        Title="CatalogWindow" Icon="/Resources/icon.ico" Height="450" Width="700" MinWidth="700" MaxWidth="1200" Loaded="Window_Loaded" FontFamily="Verdana">
+        Title="ООО Gentlmen" Icon="/Resources/icon.ico" Height="450" Width="700" MinWidth="700" MaxWidth="1200" Loaded="Window_Loaded" FontFamily="Verdana">
     <Window.Resources>
     </Window.Resources>
     <Grid x:Name="gridMain">
@@ -19,14 +19,14 @@
         <Grid Grid.Row="0" Style="{StaticResource MainColor}" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="/Resources/logo.png" Margin="0"/>
-            <TextBlock Grid.Column="1" Style="{StaticResource Title}" Text="Каталог"/>
-            <Button Name="ButtonExit" Grid.Column="2" Content="Выход" Margin="10" Click="ButtonExit_Click"/>
+            <Image Grid.Column="0" Source="/Resources/logo.png"/>
+            <TextBlock Grid.Column="1" Style="{StaticResource Title}" Text="Каталог" Height="30" Width="100"/>
+            <Button Name="ButtonExit" Grid.Column="2" Content="Выход" Margin="10,10,10,10" Click="ButtonExit_Click"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Name="gridInner">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="593*"/>
                 <ColumnDefinition Width="200"/>
@@ -46,7 +46,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Image Height="80" Width="80" Source="{Binding Path=ProductPhotoCorrected}" Margin="10"/>
                             <StackPanel Orientation="Vertical" Width="570">
-                                <TextBlock Text="{Binding StringFormat=Артикул: {0}, Path=ProductActicle}" Visibility="Collapsed"/>
+                                <TextBlock Text="{Binding StringFormat=Артикул: {0}, Path=ProductArticle}"/>
                                 <TextBlock Text="{Binding StringFormat={}{0}, Path=ProductName}" FontWeight="DemiBold"/>
                                 <TextBlock Text="{Binding StringFormat={}{0}, Path=ProductDescription}"/>
                                 <TextBlock Text="{Binding StringFormat=Цена без скидки: {0} руб., Path=ProductCost}"/>
@@ -58,10 +58,11 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="Сортировка по цене:"/>
+                <TextBlock Text="Сортировка:"/>
                 <ComboBox x:Name="comboBoxSort" SelectionChanged="comboBoxSort_SelectionChanged">
-                    <ComboBoxItem Content="По возрастанию"/>
-                    <ComboBoxItem Content="По убыванию"/>
+                    <ComboBoxItem Content="Поумолчанию"/>
+                    <ComboBoxItem Content="Цена: По возрастанию"/>
+                    <ComboBoxItem Content="Цена: По убыванию"/>
                 </ComboBox>
                 <TextBlock Text="Фильтрация по скидке"/>
                 <ComboBox x:Name="comboBoxFilterDiscount" SelectionChanged="comboBoxFilterDiscount_SelectionChanged">
@@ -75,13 +76,11 @@
                 </ComboBox>
                 <TextBlock Text="Поиск:"/>
                 <TextBox x:Name="textBoxSearch" TextChanged="textBoxSearch_TextChanged"/>
-                <TextBlock Name="TextBlockAmount" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="120,10,0,0" 
-       TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="14"/>
                 <Button x:Name="buttonOpenCart" Content="Корзина" Click="ButtonOpenCart_OnClick" Height="30" Width="172"/>
             </StackPanel>
             <TextBlock Name="TextBlockName" Grid.Row="0" Grid.Column="1" Text="ФИО" HorizontalAlignment="Left"  VerticalAlignment="Center" 
                    TextWrapping="Wrap" FontSize="14"/>
-            
+
         </Grid>
     </Grid>
 </Window>

@@ -49,7 +49,7 @@ namespace OOO_Gentlmen.Classes
         {
             get
             {
-                return ProductCost * (ProductDiscount / 100);
+                return ProductCost * ((decimal)ProductDiscount / 100);
             }
         }
     }

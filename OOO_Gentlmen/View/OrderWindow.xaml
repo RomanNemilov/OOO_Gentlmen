@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OOO_Gentlmen.View"
         mc:Ignorable="d"
-                Title="OrderWindow" Height="450" Width="800" MaxWidth="800" FontFamily="Verdana"
+                Title="ООО Gentlmen" Height="450" Width="800" MaxWidth="800" FontFamily="Verdana" Icon="/Resources/icon.ico"
         Loaded="Window_Loaded">
     <Window.Resources>
     </Window.Resources>
@@ -20,12 +20,12 @@
         <Grid Grid.Row="0" Style="{StaticResource MainColor}" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="/Resources/logo.png" Margin="0"/>
-            <TextBlock Grid.Column="1" Style="{StaticResource Title}"><Run Language="ru-ru" Text="Создание заказа"/></TextBlock>
-            <Button Name="ButtonExit" Grid.Column="2" Content="Назад" Margin="10" Click="ButtonExit_Click"/>
+            <Image Grid.Column="0" Source="/Resources/logo.png"/>
+            <TextBlock Grid.Column="1" Style="{StaticResource Title}" Height="30" Width="208"><Run Language="ru-ru" Text="Создание заказа"/></TextBlock>
+            <Button Name="ButtonExit" Grid.Column="2" Content="Назад" Margin="10,10,10,10" Click="ButtonExit_Click"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -36,13 +36,13 @@
                 <RowDefinition Height="19*"/>
                 <RowDefinition Height="109*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="ListBoxProducts" Grid.Row="1" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox x:Name="ListBoxProducts" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <Image Height="80" Width="80" Source="{Binding Path=ProductExtended.ProductPhotoCorrected}" Margin="10"/>
                             <StackPanel Orientation="Vertical" Width="370">
-                                <TextBlock Text="{Binding StringFormat=Артикул: {0}, Path=ProductExtended.ProductActicle}" Visibility="Collapsed"/>
+                                <TextBlock Text="{Binding StringFormat=Артикул: {0}, Path=ProductExtended.ProductArticle}"/>
                                 <TextBlock Text="{Binding StringFormat={}{0}, Path=ProductExtended.ProductName}" FontWeight="DemiBold"/>
                                 <TextBlock Text="{Binding StringFormat={}{0}, Path=ProductExtended.ProductDescription}"/>
                                 <TextBlock Text="{Binding StringFormat=Цена без скидки: {0} руб., Path=ProductExtended.ProductCost}"/>
@@ -52,7 +52,7 @@
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <TextBox Text="{Binding StringFormat={}{0}, Path=Count}" HorizontalAlignment="Center" 
                                           Width="75" TextChanged="TextBoxCount_TextChanged"/>
-                                <Button Name="ButtonRemove" Style="{StaticResource ButtonStyle}" Content="Удалить" 
+                                <Button Name="ButtonRemove" Content="Удалить"
                                         FontSize="12" Height="25" Width="75" HorizontalAlignment="Left" Click="ButtonDelete_Click"/>
                             </StackPanel>
                         </StackPanel>
@@ -60,17 +60,20 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBlock x:Name="TextBlockStatus" Text="Статус: "/>
                 <TextBlock x:Name="TextBlockTotal" Text="Сумма: "/>
                 <TextBlock x:Name="TextBlockDiscount" Text="Скидка:"/>
-                <TextBlock x:Name="TextBlockTotalWithDiscount" Text="Сумма со скидкой:"/>
-                <TextBlock Text="Пункт выдачи"/>
-                <ComboBox Name="ComboBoxPoint" Style="{StaticResource Normal}"/>
-                <TextBlock Text="ФИО"></TextBlock>
-                <TextBox x:Name="TextBoxFIO"></TextBox>
+                <TextBlock x:Name="TextBlockTotalWithDiscount" Text="Сумма со скидкой:" FontWeight="DemiBold"/>
+                <TextBlock><Run Language="ru-ru" Text="Поиск клиента"/></TextBlock>
+                <TextBox x:Name="TextBoxClient" TextChanged="TextBoxClient_TextChanged"/>
+                <TextBlock Text="Клиент"/>
+                <ComboBox Name="ComboBoxClient" Style="{StaticResource Normal}"/>
+                <TextBlock><Run Language="ru-ru" Text="Комментарий"/></TextBlock>
+                <TextBox x:Name="TextBoxComment" TextChanged="TextBoxClient_TextChanged" Height="99"/>
                 <Button x:Name="ButtonCreateOrder" Content="Оформить заказ" Click="ButtonCreateOrder_Click" Height="30" Width="168"/>
 
             </StackPanel>
+            <TextBlock x:Name="TextBlockName" Text="ФИО" HorizontalAlignment="Left"  VerticalAlignment="Center" 
+                TextWrapping="Wrap" FontSize="14" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>

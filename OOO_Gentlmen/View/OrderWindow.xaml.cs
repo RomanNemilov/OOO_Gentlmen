@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,10 @@ namespace OOO_Gentlmen.View
         {
             UpdateCosts();
             UpdateList();
-            TextBoxFIO.Text = Helper.User == null ? "" : Helper.User.UserFullName;
-
+            TextBlockName.Text = Helper.User == null ? "" : Helper.User.UserFullName;
+            ComboBoxClient.DisplayMemberPath = "UserLogin";
+            ComboBoxClient.SelectedValuePath = "UserID";
+            SearchClient();
         }
 
         private void UpdateStatus()
@@ -41,9 +44,9 @@ namespace OOO_Gentlmen.View
 
         private void UpdateCosts()
         {
-            TextBlockTotal.Text = Helper.Order.Total.ToString("F") + " руб.";
-            TextBlockDiscount.Text = Helper.Order.Discount.ToString("F") + " руб.";
-            TextBlockTotalWithDiscount.Text = Helper.Order.TotalWithDiscount.ToString("F") + " руб.";
+            TextBlockTotal.Text = "Сумма: " + Helper.Order.Total.ToString("F") + " руб.";
+            TextBlockDiscount.Text = "Скидка: " + Helper.Order.Discount.ToString("F") + " руб.";
+            TextBlockTotalWithDiscount.Text = "Итого: " + Helper.Order.TotalWithDiscount.ToString("F") + " руб.";
         }
 
         private void UpdateList()
@@ -101,11 +104,23 @@ namespace OOO_Gentlmen.View
                 MessageBox.Show("Корзина пуста!");
                 return;
             }
+            if (ComboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента!");
+                return;
+            }
             Model.Order orderDB = new Model.Order
             {
                 OrderDate = DateTime.Now,
-                OrderStatus = 1
+                OrderStatus = 1,
+                OrderManager = Helper.User.UserID,
+                OrderClient = (int)ComboBoxClient.SelectedValue
             };
+
+            if (!String.IsNullOrEmpty(TextBoxComment.Text))
+            {
+                orderDB.OrderComment = TextBoxComment.Text;
+            }
 
             try
             {
@@ -134,6 +149,18 @@ namespace OOO_Gentlmen.View
                 MessageBox.Show("При добавлении данных произошла ошибка");
             }
         }
-
+        private void SearchClient()
+        {
+            using (Model.dbGentlmen db = new Model.dbGentlmen())
+            {
+                string search = "%" + TextBoxClient.Text + "%";
+                ComboBoxClient.ItemsSource = null;
+                ComboBoxClient.ItemsSource = db.User.Where(u => u.UserRole == 1 && DbFunctions.Like(u.UserLogin, search)).ToList();
+            }
+        }
+        private void TextBoxClient_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchClient();
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace OOO_Gentlmen
         {
             string login = textBoxLogin.Text;
             string password = textBoxPassword.Password;
+            string captcha = textBoxCaptcha.Text;
             StringBuilder sb = new StringBuilder();
             if (String.IsNullOrEmpty(login))
             {
@@ -53,7 +54,11 @@ namespace OOO_Gentlmen
             {
                 sb.AppendLine("Вы не ввели пароль");
             }
-            if (!CheckCaptcha())
+            if (captchaReqired && String.IsNullOrEmpty(captcha))
+            {
+                sb.AppendLine("Вы не ввели капчу");
+            }
+            else if (!CheckCaptcha())
             {
                 sb.AppendLine("Неверная каптча");
                 UpdateCaptcha();
@@ -154,6 +159,11 @@ namespace OOO_Gentlmen
             captcha.IsEnabled = true;
             textBoxCaptcha.IsEnabled = true;
             textBoxPassword.IsEnabled = true;
+        }
+
+        private void textBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

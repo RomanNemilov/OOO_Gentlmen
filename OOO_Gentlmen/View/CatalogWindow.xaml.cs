@@ -37,9 +37,18 @@ namespace OOO_Gentlmen.View
             using (Model.dbGentlmen db = new Model.dbGentlmen { })
             {
                 List<Model.Category> categories = db.Category.ToList();
+                var allCategories = new Model.Category()
+                {
+                    CategoryID = 0,
+                    CategoryName = "Все категории"
+                };
+                categories.Insert(0, allCategories);
                 comboBoxFilterCategory.ItemsSource = categories;
                 comboBoxFilterCategory.DisplayMemberPath = "CategoryName";
                 comboBoxFilterCategory.SelectedValuePath = "CategoryID";
+                comboBoxFilterCategory.SelectedIndex = 0;
+                comboBoxSort.SelectedIndex = 0;
+                comboBoxFilterDiscount.SelectedIndex = 0;
                 if (Helper.User != null)
                 {
                     TextBlockName.Text = Helper.User.UserFullName;
@@ -50,7 +59,7 @@ namespace OOO_Gentlmen.View
                 }
                 UpdateProduct();
             }
-            if (Helper.User == null || Helper.User.UserID == 1)
+            if (Helper.User == null || Helper.User.UserID == 2)
             {
                 contextMenuAdd.Visibility = Visibility.Visible;
             }
@@ -74,18 +83,15 @@ namespace OOO_Gentlmen.View
         {
             using (Model.dbGentlmen db = new Model.dbGentlmen())
             {
-                List<Model.Product> products;
+                List<Model.Product> products = db.Product.ToList();
 
                 switch (comboBoxSort.SelectedIndex)
                 {
-                    case 0:
-                        products = db.Product.OrderBy(pr => pr.ProductCost).ToList();
-                        break;
                     case 1:
-                        products = db.Product.OrderByDescending(pr => pr.ProductCost).ToList();
+                        products = products.OrderBy(pr => pr.ProductCost).ToList();
                         break;
-                    default:
-                        products = db.Product.ToList();
+                    case 2:
+                        products = products.OrderByDescending(pr => pr.ProductCost).ToList();
                         break;
                 }
                 int totalAmount = products.Count;
@@ -100,8 +106,10 @@ namespace OOO_Gentlmen.View
                     case 3:
                         products = products.Where(pr => pr.ProductDiscount >= 15).ToList();
                         break;
+                    default:
+                        break;
                 }
-                if (comboBoxFilterCategory.SelectedValue != null)
+                if (comboBoxFilterCategory.SelectedValue != null && (int)comboBoxFilterCategory.SelectedValue != 0)
                 {
                     products = products.Where(pr => pr.ProductCategory == (int)comboBoxFilterCategory.SelectedValue).ToList();
                 }
@@ -125,7 +133,6 @@ namespace OOO_Gentlmen.View
                 listBoxProducts.ItemsSource = null;
                 listBoxProducts.ItemsSource = productsExtended;
 
-                TextBlockAmount.Text = $"{productsExtended.Count} из {totalAmount}";
             }
         }
 
